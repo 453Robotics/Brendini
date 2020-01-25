@@ -7,25 +7,52 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.drivetrain;
+import frc.robot.subsystems.subsSystembase;
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.Joystick;
+
+
 
 /**
  * An example command that uses an example subsystem.
  */
-public class ExampleCommand extends CommandBase {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ExampleSubsystem m_subsystem;
+public class DriveTrain extends CommandBase {
+  @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
+  private final DriveTrain m_subsystem;
+  DifferentialDrive m_myRobot;//////////////
+  private Joystick m_leftStick;
+  private Joystick m_rightStick;
+
+
+
+    public void robotInit()
+    {
+
+    
+      m_leftStick = new Joystick(0);//move to command
+  
+
+
+    }
+  
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ExampleCommand(ExampleSubsystem subsystem) {
+  public DriveTrain(DriveTrain subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
+  }
+
+  private void addRequirements(DriveTrain subsystem) {
   }
 
   // Called when the command is initially scheduled.
@@ -48,4 +75,21 @@ public class ExampleCommand extends CommandBase {
   public boolean isFinished() {
     return false;
   }
+
+  /**
+   * This function is called periodically during test mode.
+   */
+  
+  public void tPeriodic() {//move to command
+
+
+    m_myRobot.arcadeDrive(-m_leftStick.getY(Hand.kLeft), m_leftStick.getX(Hand.kLeft));
+  
+
+
+}
+
+
+
+
 }
